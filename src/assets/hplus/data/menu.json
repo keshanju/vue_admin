@@ -1,0 +1,42 @@
+[{
+	"id":1,
+	"name":"",
+	"path":"",
+	"text":"主页",
+	"isParent":true,
+	"level":1,
+	"icon":"fa fa-home",
+	"children":[
+		{
+			"id":2,
+			"name":"index_v1",
+			"path":"/index_v1",
+			"text":"主页示例1",
+			"isParent":false,
+			"level":2,
+			"icon":"",
+			"children":[]
+		},
+		{
+			"id":3,
+			"name":"index_v2",
+			"path":"/index_v2",
+			"text":"主页示例2",
+			"isParent":false,
+			"level":2,
+			"icon":"",
+			"children":[]
+		},
+		{
+			"id":4,
+			"name":"index_v3",
+			"path":"/index_v3",
+			"text":"主页示例3",
+			"isParent":false,
+			"level":2,
+			"icon":"",
+			"children":[]
+		}
+	]
+}
+]

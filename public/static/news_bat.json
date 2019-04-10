@@ -1,0 +1,18 @@
+[
+  {
+    "title": "标题",
+    "image_url": "头图",
+    "class_type": 5,
+    "label": "标签",
+    "summary": "摘要",
+    "content": "内容",
+    "tag": "引用标记",
+    "hits": 0,
+    "create_time": "2018-07-31 20:44:19",
+    "support_type": 1,
+    "publish_status":1,
+    "publish_time":"2018-07-31 20:44:19",
+    "seo_keywords": "seo关键词",
+    "seo_desc": "seo描述" 
+  }
+]
