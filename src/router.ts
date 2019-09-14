@@ -2,21 +2,23 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import main from './views/layout/main.vue';
 
-Vue.use(Router)
-
+Vue.use(Router);
 export const constantRouterMap = [
     {
+        name: 'login',
         path: '/login',
-        component: () => import('@/views/login/index.vue')},
+        component: () => import('@/views/login/index.vue')
+    },
     {
+        name: 'main',
         path: '/index',
         component: main,
     },
     {
+        name: 'Dashboard',
         path: '/',
         component: () => import('@/views/layout/main.vue'),
-        //redirect: '/dashboard',
-        name: 'Dashboard',
+        redirect: '/dashboard',
         children: [
             // 框架
             {path: 'dashboard', component: () => import('@/views/dashboard/index.vue')},
@@ -36,10 +38,7 @@ export const constantRouterMap = [
             {path: 'user/:id/point_log/list/:db_num', component: () => import('@/views/user/point_log/list.vue')},
             // { path: 'user/:id/point_log/edit/:point_log_id?', component: () => import('@/views/user/point_log/edit.vue') },
             {path: 'user/:id/pause_log/list', component: () => import('@/views/user/pause_log/list.vue')},
-            {
-                path: 'user/:id/pause_log/edit/:pause_log_id?',
-                component: () => import('@/views/user/pause_log/edit.vue')
-            },
+            {path: 'user/:id/pause_log/edit/:pause_log_id?', component: () => import('@/views/user/pause_log/edit.vue')},
             {path: 'user/:id/pause/edit/:user_id?', component: () => import('@/views/user/pause/edit.vue')},
             {path: 'user/:id/speed_log/list/:db_num?', component: () => import('@/views/user/speed_log/list.vue')},
             //退款申请表
@@ -55,10 +54,7 @@ export const constantRouterMap = [
             {path: 'user/appeal/edit/:id?', component: () => import('@/views/user/appeal/edit.vue')},
             {path: 'user/session/list', component: () => import('@/views/user/session/list.vue')},
             {path: 'user/session/edit/:id?', component: () => import('@/views/user/session/edit.vue')},
-            {
-                path: 'user/:id/session/force_logout/:user_id/:session_id',
-                component: () => import('@/views/user/session/force_logout.vue')
-            },
+            {path: 'user/:id/session/force_logout/:user_id/:session_id', component: () => import('@/views/user/session/force_logout.vue')},
             {path: 'user/forceloginout/list', component: () => import('@/views/user/forceloginout/list.vue')},
             {path: 'user/forceloginout/edit:id?', component: () => import('@/views/user/forceloginout/edit.vue')},
             // 订单
@@ -165,12 +161,10 @@ export const constantRouterMap = [
             {path: 'demo/test', component: () => import('@/views/demo/test.vue')},
         ]
     }
-]
-
-let routes: any = constantRouterMap
-
+];
+let routes: any = constantRouterMap;
 let rr = new Router({
+    mode: 'history',
     routes
 });
-
 export default rr

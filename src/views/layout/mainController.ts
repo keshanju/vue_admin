@@ -1,12 +1,12 @@
-import { Component, Vue, Prop } from "vue-property-decorator";
-import { DxTreeView } from "devextreme-vue";
+import {Component, Vue, Prop} from "vue-property-decorator";
+import {DxTreeView} from "devextreme-vue";
 import BaseVue from "@/common/BaseVue";
 import * as MenuApi from "@/api/MenuApi";
 import * as StaffApi from "@/api/StaffApi";
 import DevExpress from "devextreme/bundles/dx.all";
-import { CommonUtils } from "@/common/CommonUtils";
-import { Lang } from "@/common/Lang";
-import { RespCode } from "@/common/RespCode";
+import {CommonUtils} from "@/common/CommonUtils";
+import {Lang} from "@/common/Lang";
+import {RespCode} from "@/common/RespCode";
 import VueSlimScroll from "vue-slimscroll";
 
 import "@/assets/hplus/js/jquery.min.js";
@@ -28,149 +28,151 @@ Vue.use(VueSlimScroll);
  * 登录
  */
 @Component({
-  components: {
-    DxTreeView,
-    user_change_password
-  }
+    components: {
+        DxTreeView,
+        user_change_password
+    }
 })
 export default class IndexController extends BaseVue {
-  private dxTreeViewKey1: string = "dxTreeView_Key_1";
-  private dxTreeView1: DevExpress.ui.dxTreeView;
-  private menuAPI: MenuApi.MenuApi = new MenuApi.MenuApi();
-  private staffAPI: StaffApi.StaffApi = new StaffApi.StaffApi();
-  private title: string = CommonUtils.siteName;
-  private version: string = CommonUtils.version;
-  private exit: string = Lang.Exit;
-  private copyrightText = Lang.CopyRight;
-  private versionText = Lang.Version;
-  private staffName: string = "";
-  private staffNickName: string = "";
-  private staffRoleName: string = "";
-  private shortSiteTitle = SITE_SHORT_TITLE;
+    private dxTreeViewKey1: string = "dxTreeView_Key_1";
+    private dxTreeView1: DevExpress.ui.dxTreeView;
+    private menuAPI: MenuApi.MenuApi = new MenuApi.MenuApi();
+    private staffAPI: StaffApi.StaffApi = new StaffApi.StaffApi();
+    private title: string = CommonUtils.siteName;
+    private version: string = CommonUtils.version;
+    private exit: string = Lang.Exit;
+    private copyrightText = Lang.CopyRight;
+    private versionText = Lang.Version;
+    private staffName: string = "";
+    private staffNickName: string = "";
+    private staffRoleName: string = "";
+    private shortSiteTitle = SITE_SHORT_TITLE;
+    public menuItems: any[] = [];
+    //菜单图标
+    public menuIcons: string[] = [
+        "fa-user",
+        "fa-bars",
+        "fa-cube",
+        "fa-bars",
+        "fa-server",
+        "fa-gamepad",
+        "fa-cog",
+        "fa-bars",
+        "fa-bars",
+        "fa-bars",
+        "fa-bars",
+    ];
 
-  public menuItems: any[] = [];
-  //菜单图标
-  public menuIcons: string[] = [
-    "fa-user",
-    "fa-bars",
-    "fa-cube",
-    "fa-bars",
-    "fa-server",
-    "fa-gamepad",
-    "fa-cog",
-    "fa-bars",
-    "fa-bars",
-    "fa-bars",
-    "fa-bars",
-  ];
-
-  public getMenuIcon(index: number = 0): string {
-    return this.menuIcons[index];
-  }
-
-  //用户信息
-  public userInfo: object;
-
-  public userChangePassWordControl: BaseVue | any;
-
-  // 入口
-  protected async mounted() {
-    let d = CommonUtils.getStaffLoginInfo();
-    if (d != null) {
-      this.staffName = d.data.user_info.staff_name;
-      this.staffNickName = d.data.user_info.name;
-      this.staffRoleName = d.data.user_info.role_name;
+    public getMenuIcon(index: number = 0): string {
+        return this.menuIcons[index];
     }
-    await this.getMenu();
-    //菜单
-    $("#side-menu").metisMenu();
 
-    //高度
-    $("#content-main").height($(window).height() - 130);
+    //用户信息
+    public userInfo: object;
 
-    this.userChangePassWordControl = this.$refs["user_change_password"] as any;
-  }
+    public userChangePassWordControl: BaseVue | any;
 
-  /**
-   * 获取菜单数据
-   */
-  private async getMenu() {
-    let ds = [];
-    let d = await this.menuAPI.getList();
-    if (d != null && d.code == RespCode.zero) {
-      let ss = d.data.filter((element, index) => {
-        return element.menu_level == 1;
-      });
-      for (const ele of ss) {
-        const p_id = ele.id;
-
-        let aa: any = {
-          id: ele.id,
-          level: ele.menu_level,
-          pid: ele.menu_pid,
-          text: ele.menu_name,
-          href: ele.menu_route,
-          expanded: true,
-          items: [] = []
-        };
-        let ww = d.data.filter((element, index) => {
-          return element.menu_level == 2 && element.menu_pid == p_id;
-        });
-
-        for (const ele2 of ww) {
-          aa.items.push({
-            id: ele2.id,
-            level: ele2.menu_level,
-            pid: ele2.menu_pid,
-            text: ele2.menu_name,
-            href: ele2.menu_route
-          });
+    // 入口
+    protected async mounted() {
+        let d = CommonUtils.getStaffLoginInfo();
+        if (d != null) {
+            this.staffName = d.data.user_info.staff_name;
+            this.staffNickName = d.data.user_info.name;
+            this.staffRoleName = d.data.user_info.role_name;
         }
-        ds.push(aa);
-      }
-      // this.dxTreeView1.option({ dataSource: ds });
-      this.menuItems = ds;
+        await this.getMenu();
+        //菜单
+        $("#side-menu").metisMenu();
+
+        //高度
+        $("#content-main").height($(window).height() - 130);
+
+        this.userChangePassWordControl = this.$refs["user_change_password"] as any;
     }
-  }
 
-  private toggleMini() {
-    $("body").toggleClass("mini-navbar");
-    $("body").hasClass("mini-navbar")
-      ? $("body").hasClass("fixed-sidebar")
-        ? ($("#side-menu").hide(),
-          setTimeout(function() {
-            $("#side-menu").fadeIn(500);
-          }, 300))
-        : $("#side-menu").removeAttr("style")
-      : ($("#side-menu").hide(),
-        setTimeout(function() {
-          $("#side-menu").fadeIn(500);
-        }, 100));
-  }
+    /**
+     * 获取菜单数据
+     */
+    private async getMenu() {
+        let ds = [];
+        let d = await this.menuAPI.getList();
+        if (d != null && d.code == RespCode.zero) {
+            let ss = d.data.filter((element, index) => {
+                return element.menu_level == 1;
+            });
+            for (const ele of ss) {
+                const p_id = ele.id;
 
-  /**
-   * 退出登录
-   */
-  private async logOut() {
-    try {
-      //移除后台Token
-      CommonUtils.removeStaffLoginInfo();
-      CommonUtils.removeDictionary();
-      let d = await this.staffAPI.loginOut();
-    } catch (error) {
-      console.log(error);
+                let aa: any = {
+                    id: ele.id,
+                    level: ele.menu_level,
+                    pid: ele.menu_pid,
+                    text: ele.menu_name,
+                    href: ele.menu_route,
+                    expanded: true,
+                    items: [] = []
+                };
+                let ww = d.data.filter((element, index) => {
+                    return element.menu_level == 2 && element.menu_pid == p_id;
+                });
+
+                for (const ele2 of ww) {
+                    aa.items.push({
+                        id: ele2.id,
+                        level: ele2.menu_level,
+                        pid: ele2.menu_pid,
+                        text: ele2.menu_name,
+                        href: ele2.menu_route
+                    });
+                }
+                ds.push(aa);
+            }
+            // this.dxTreeView1.option({ dataSource: ds });
+            this.menuItems = ds;
+        }
     }
-    this.redirect("/login");
-  }
 
-  private href_link(link: string) {
-    this.$router.push({ path: link });
-  }
+    /**
+     * 切换侧边栏
+     */
+    public toggleMini() {
+        $("body").toggleClass("mini-navbar");
+        $("body").hasClass("mini-navbar")
+            ? $("body").hasClass("fixed-sidebar")
+            ? ($("#side-menu").hide(),
+                setTimeout(function () {
+                    $("#side-menu").fadeIn(500);
+                }, 300))
+            : $("#side-menu").removeAttr("style")
+            : ($("#side-menu").hide(),
+                setTimeout(function () {
+                    $("#side-menu").fadeIn(500);
+                }, 100));
+    }
 
-  /**
-   * 修改密码
-   */
-  public UserChangePassword() {
-    this.userChangePassWordControl.Show();
-  }
+    /**
+     * 退出登录
+     */
+    private async logOut() {
+        try {
+            //移除后台Token
+            CommonUtils.removeStaffLoginInfo();
+            CommonUtils.removeDictionary();
+            let d = await this.staffAPI.loginOut();
+        } catch (error) {
+            console.log(error);
+        }
+        this.redirect("/login");
+    }
+
+    private href_link(link: string) {
+        this.$router.push({path: link});
+    }
+
+    /**
+     * 修改密码
+     */
+    public UserChangePassword() {
+        this.userChangePassWordControl.Show();
+    }
 }
