@@ -8,7 +8,6 @@ import * as staffRoleModel from '@/models/StaffRoleModel';
  */
 export class StaffApi extends laBaseApi.BaseApi {
 
-    //#region 登录 登出
 
     /**
      * 获取验证码
@@ -17,9 +16,10 @@ export class StaffApi extends laBaseApi.BaseApi {
         let result: staffModel.StaffCaptchaResult = await this.httpGet("/staff/captcha", false);
         return result;
     }
+
     /**
      * 判断用户登录
-     * @param loginData 
+     * @param loginData
      */
     public async loginCheck(loginData: any) {
         let result: staffModel.StaffLoginResult = await this.httpPost("/staff/login", loginData);
@@ -35,11 +35,6 @@ export class StaffApi extends laBaseApi.BaseApi {
         return await this.httpDelete(url + "?" + data, false);
     }
 
-    //#endregion
-
-    //#region 员工管理
-
-
     /**
      *  获取员工记录集合
      * @param strWhere  查询条件
@@ -54,7 +49,7 @@ export class StaffApi extends laBaseApi.BaseApi {
 
     /**
      * 添加管理员数据
-     * @param postData a=1&b=2 
+     * @param postData a=1&b=2
      */
     public async staffAdd(postData: string) {
         let url: string = "/staff/users";
@@ -64,17 +59,17 @@ export class StaffApi extends laBaseApi.BaseApi {
 
     /**
      * 编辑管理员数据
-     * @param postData 
+     * @param postData
      */
     public async staffUpdate(id: number, postData: string) {
         let url: string = "/staff/users/" + id;
         let result: baseModel.BaseModel = await this.httpPut(url, postData);
         return result;
     }
-    
+
     /**
      * 编辑管理员数据
-     * @param postData 
+     * @param postData
      */
     public async staffUpdateJson(id: number, postData: object) {
         let url: string = "/staff/users/" + id;
@@ -84,7 +79,7 @@ export class StaffApi extends laBaseApi.BaseApi {
 
     /**
      * 获取员工模型
-     * @param id 
+     * @param id
      */
     public async getStaffModel(id: number) {
         let url: string = "/staff/users/" + id + "?account_token=" + this.token;
@@ -93,22 +88,23 @@ export class StaffApi extends laBaseApi.BaseApi {
     }
 
     /**
-   * 删除员工模型
-   * @param id 
-   */
+     * 删除员工模型
+     * @param id
+     */
     public async delStaffModel(id: number) {
         let url: string = "/staff/users/" + id + "?account_token=" + this.token;
         return await this.httpGet(url);
     }
+
     //#endregion
 
     //#region   员工分组
 
     /**
      * 获取员工分组
-     * @param strWhere 
-     * @param pageSize 
-     * @param pageIndex 
+     * @param strWhere
+     * @param pageSize
+     * @param pageIndex
      */
     public async staffRoleGroupListPager(strWhere: string = "", pageSize: number = 15, pageIndex: number = 1) {
         let url: string = "/staff/role?account_token=" + this.token + "&size=" + pageSize + "&page=" + pageIndex + strWhere;
@@ -118,7 +114,7 @@ export class StaffApi extends laBaseApi.BaseApi {
 
     /**
      * 员工组添加
-     * @param model 
+     * @param model
      */
     public async staffRoleGroupAdd(name: string, menu_ids: string) {
         let url = "/staff/role";
@@ -128,8 +124,8 @@ export class StaffApi extends laBaseApi.BaseApi {
 
     /**
      * 员工组更新
-     * @param id 
-     * @param model 
+     * @param id
+     * @param model
      */
     public async staffRoleGroupUpdate(id: number, name: string, menu_ids: string) {
         let url = "/staff/role/" + id;
@@ -139,16 +135,17 @@ export class StaffApi extends laBaseApi.BaseApi {
 
     /**
      * 批量删除员工组
-     * @param ids 
+     * @param ids
      */
     public async staffRoleGroupDeleteBat(ids: string) {
         let url = "/staff/role";
         let data = "account_token=" + this.token + "&ids=" + ids;
         return await this.httpDelete(url + "?" + data);
     }
+
     /**
      * 获取员工组模型
-     * @param id 
+     * @param id
      */
     public async staffRoleGroupModel(id: number) {
         let url = "/staff/role/" + id;
@@ -156,11 +153,12 @@ export class StaffApi extends laBaseApi.BaseApi {
         let result: staffRoleModel.ModelResult = await this.httpGet(url + "?" + data);
         return result;
     }
+
     //#endregion
 
     /**
      * 验证超级密码是否正确
-     * @param super_password 
+     * @param super_password
      */
     public async getStaffSupperPassword(super_password: string) {
         let url = "/staff/users/super";
