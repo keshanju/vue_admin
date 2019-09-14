@@ -1,12 +1,11 @@
-/**
- * 返回结果
- */
+//  接口请求返回code值列表类
 export class RespCode {
 
     /**
      * 是否为0
      */
     public static zero = 0;
+
     /**
      * 是否成功
      */
@@ -22,8 +21,7 @@ export class RespCode {
      */
     public static isSameSaveData: number = 300001;
 
-
-        /**
+    /**
      * 多账号登录
      */
     public static IsSameLogin: number = 400006;
