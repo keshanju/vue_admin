@@ -1,0 +1,66 @@
+.dx-layout-manager .dx-label-h-align .dx-field-item-content .dx-checkbox,
+.dx-layout-manager .dx-label-h-align .dx-field-item-content .dx-switch {
+    margin-top: 1px;
+    margin-bottom: 4px;
+}
+
+.dx-datagrid-table .dx-data-row.dx-state-hover:not(.dx-selection):not(.dx-row-inserted):not(.dx-row-removed):not(.dx-edit-row) > td:not(.dx-focused) {
+    background-color: #17987e;
+    color: #FFF !important;
+}
+
+.dx-datagrid-table .dx-data-row.dx-state-hover:not(.dx-selection):not(.dx-row-inserted):not(.dx-row-removed):not(.dx-edit-row) > td:not(.dx-focused) * {
+    background: none !important;
+    color: #FFF !important;
+}
+
+.dx-datagrid-table .dx-data-row.dx-state-hover:not(.dx-selection):not(.dx-row-inserted):not(.dx-row-removed):not(.dx-edit-row) > td:not(.dx-focused) a {
+    color: #FFF !important;
+}
+
+.dx-datagrid-table .dx-data-row.dx-state-hover:not(.dx-selection):not(.dx-row-inserted):not(.dx-row-removed):not(.dx-edit-row) > .dx-datagrid-readonly .dx-texteditor .dx-texteditor-input {
+    background-color: #17987e;
+    color: #FFF !important;
+}
+
+/*滚动条*/
+.dx-scrollable-scroll-content {
+    width: 100%;
+    height: 100%;
+    background-color: #17987e;
+    box-shadow: 0 0 0 1px transparent;
+}
+
+.dx-form-group-with-caption .dx-form-group-content {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+
+.login .dx-form-group-with-caption {
+    text-align: center !important;
+}
+
+.login .dx-form-group-caption {
+    line-height: 50px !important;
+    font-size: 18px !important;
+}
+
+.login .dx-item,
+.login .dx-item-content {
+    width: 90% !important;
+    margin: auto;
+}
+
+.login .dx-gallery {
+    height: 25px !important;
+}
+
+.link_active {
+    background: #17987e !important;
+    color: #fff !important;
+}
+
+.dx-popup-wrapper {
+    z-index: 2100 !important;
+}
