@@ -64,3 +64,112 @@
 .dx-popup-wrapper {
     z-index: 2100 !important;
 }
+
+.page-container {
+    width: 100%;
+}
+
+.page-container .page-header {
+    margin: 0 auto;
+    position: relative;
+    padding: 20px;
+    background: 0 0;
+    border-bottom: none;
+}
+
+.page-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 18px;
+}
+
+.page-container .page-content {
+    padding: 20px;
+    overflow: hidden;
+}
+
+.page-header + .page-content {
+    padding-top: 0;
+}
+
+.content-header {
+    position: relative;
+    padding: 20px 0 0 10px;
+}
+
+.content-header > h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.content-header > h1 > small {
+    font-size: 15px;
+    display: inline-block;
+    padding-left: 4px;
+    font-weight: 300;
+}
+
+.content-header > .breadcrumb {
+    background: transparent;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 14px;
+    border-radius: 2px;
+}
+
+.breadcrumb > li {
+    display: inline-block;
+}
+
+.breadcrumb > .active {
+    color: #777;
+}
+
+.content-header > .breadcrumb > li > a {
+    color: #444;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.content-header > .breadcrumb > li > a > .fa, .content-header > .breadcrumb > li > a > .glyphicon, .content-header > .breadcrumb > li > a > .ion {
+    margin-right: 5px;
+}
+
+.breadcrumb > li + li:before {
+    padding: 0 5px;
+    color: #ccc;
+    content: "/\00a0";
+}
+
+.content-header > .breadcrumb > li + li:before {
+    content: '>\00a0';
+}
+
+.bg-aqua {
+    background-color: #00c0ef !important;
+    color: #ffffff;
+}
+
+.small-box {
+    border-radius: 2px;
+    position: relative;
+    display: block;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.small-box > .inner {
+    padding: 10px;
+}
+
+.small-box h3 {
+    font-size: 38px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    white-space: nowrap;
+    padding: 0;
+}
+
+.small-box p {
+    font-size: 15px;
+}

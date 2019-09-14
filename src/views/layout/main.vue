@@ -1,14 +1,15 @@
 <template>
     <div id="wrapper">
+<!--        侧边栏导航-->
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="nav-close"><i class="fa fa-times-circle"></i></div>
             <div class="sidebar-collapse" v-slimscroll="{ height:'100%', size:0 }">
                 <ul class="nav" id="side-menu">
 <!--                    头像与昵称-->
                     <li class="nav-header">
-                        <div style="text-align: center;" class="dropdown profile-element">
-                            <img alt="image" class="img-circle" src="/static/avatar.png" style="width:64px;">
-                            <a data-toggle="dropdown" class="dropdown-toggle clear" href="javascript: void(0);">
+                        <div style="text-align: center;height: 65px;" class="dropdown profile-element">
+                            <img class="img-circle" src="/static/avatar.png" style="width:65px;float: left;margin-right: 10px;">
+                            <a style="float: left;margin-top: 10px;" data-toggle="dropdown" class="dropdown-toggle clear" href="javascript: void(0);">
                                 <span class="block m-t-xs"><strong class="font-bold">{{staffNickName}}</strong></span>
                                 <span class="text-muted text-xs block">{{staffRoleName}}<b class="caret"></b></span>
                             </a>
@@ -22,7 +23,7 @@
                     </li>
 <!--                    主页与首页-->
                     <li>
-                        <a href="javascript: void(0);">
+                        <a href="#">
                             <i class="fa fa-home"></i>
                             <span class="nav-label">主页</span>
                             <span class="fa arrow"></span>
@@ -35,7 +36,7 @@
                     </li>
 <!--                    默认的一级按钮列表-->
                     <li v-for="(item,index) in menuItems" :key="item.id">
-                        <a href="javascript: void(0);">
+                        <a href="#">
                             <i :class="'fa '+getMenuIcon(index)"></i>
                             <span class="nav-label">{{item.text}}</span>
                             <span class="fa arrow"></span>
@@ -51,36 +52,44 @@
             </div>
         </nav>
         <div id="page-wrapper" class="gray-bg dashbard-1">
+<!--        顶部导航-->
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+<!--                    左边tab切换按钮-->
                     <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" @click="toggleMini"><i
-                                class="fa fa-bars"></i></a>
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" @click="toggleMini">
+                            <i class="fa fa-bars"></i>
+                        </a>
                         <span style="margin-left: 10px;line-height: 58px;">{{title}}</span>
                     </div>
+<!--                    右边用户信息-->
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="hidden-xs">
                             <span class="m-r-sm text-muted welcome-message">欢迎您! {{staffNickName}} {{staffRoleName}}</span>
                         </li>
                         <li class="dropdown hidden-xs">
                             <a aria-expanded="false">
-                                <i class="fa fa-user"></i> <a @click="UserChangePassword">修改密码</a>
+                                <i class="fa fa-user"></i>
+                                <a @click="UserChangePassword">修改密码</a>
                             </a>
                         </li>
                         <li class="dropdown hidden-xs">
                             <a aria-expanded="false">
-                                <i class="fa fa-tasks"></i> <a @click="logOut">{{exit}}</a>
+                                <i class="fa fa-tasks"></i>
+                                <a @click="logOut">{{exit}}</a>
                             </a>
                         </li>
                     </ul>
                 </nav>
             </div>
+<!--            顶部面包屑-->
             <div class="content-header">
                 <ol class="breadcrumb">
                     <li><a @click="href_link('/dashboard')"><i class="fa fa-home"></i>首页</a></li>
-                    <li class="active">{{content_title}}</li>
+                    <li class="active"><a href="javascript: void (0);">{{content_title}}</a></li>
                 </ol>
             </div>
+<!--            页面主内容-->
             <div class="row J_mainContent" id="content-main">
                 <div class="page-container">
                     <div class="page-content">
@@ -89,6 +98,7 @@
                     </div>
                 </div>
             </div>
+<!--            底部信息-->
             <div class="row footer">
                 <p class="pull-left">&copy; 版权所有:2019~ {{title}}</p>
             </div>
@@ -98,87 +108,6 @@
 </template>
 
 <script lang="ts">
-    import IndexController from "./mainController";
-    export default IndexController;
+    import MainController from "./mainController";
+    export default MainController;
 </script>
-
-<style scoped>
-    .page-container {
-        width: 100%;
-    }
-
-    .page-container .page-header {
-        margin: 0 auto;
-        position: relative;
-        padding: 20px;
-        background: 0 0;
-        border-bottom: none;
-    }
-
-    .page-title {
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size: 18px;
-    }
-
-    .page-container .page-content {
-        padding: 20px;
-    }
-
-    .page-header + .page-content {
-        padding-top: 0;
-    }
-
-    .content-header {
-        position: relative;
-        padding: 10px 15px 0 15px;
-    }
-
-    .content-header > h1 {
-        margin: 0;
-        font-size: 24px;
-    }
-
-    .content-header > h1 > small {
-        font-size: 15px;
-        display: inline-block;
-        padding-left: 4px;
-        font-weight: 300;
-    }
-
-    .content-header > .breadcrumb {
-        background: transparent;
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size: 14px;
-        border-radius: 2px;
-    }
-
-    .breadcrumb > li {
-        display: inline-block;
-    }
-
-    .breadcrumb > .active {
-        color: #777;
-    }
-
-    .content-header > .breadcrumb > li > a {
-        color: #444;
-        text-decoration: none;
-        display: inline-block;
-    }
-
-    .content-header > .breadcrumb > li > a > .fa, .content-header > .breadcrumb > li > a > .glyphicon, .content-header > .breadcrumb > li > a > .ion {
-        margin-right: 5px;
-    }
-
-    .breadcrumb > li + li:before {
-        padding: 0 5px;
-        color: #ccc;
-        content: "/\00a0";
-    }
-
-    .content-header > .breadcrumb > li + li:before {
-        content: '>\00a0';
-    }
-</style>
