@@ -24,9 +24,6 @@ import "@/assets/hplus/css/style.min862f.css?v=4.1.0";
 import user_change_password from "@/views/staff/password/password.vue";
 
 Vue.use(VueSlimScroll);
-/**
- * 登录
- */
 @Component({
     components: {
         DxTreeView,
@@ -47,8 +44,7 @@ export default class IndexController extends BaseVue {
     private staffNickName: string = "";
     private staffRoleName: string = "";
     private shortSiteTitle = SITE_SHORT_TITLE;
-    public menuItems: any[] = [];
-    //菜单图标
+    public  menuItems: any = [];
     public menuIcons: string[] = [
         "fa-user",
         "fa-bars",
@@ -61,7 +57,7 @@ export default class IndexController extends BaseVue {
         "fa-bars",
         "fa-bars",
         "fa-bars",
-    ];
+    ];//菜单图标
 
     public getMenuIcon(index: number = 0): string {
         return this.menuIcons[index];
@@ -94,30 +90,31 @@ export default class IndexController extends BaseVue {
      * 获取菜单数据
      */
     private async getMenu() {
-        let ds = [];
-        let d = await this.menuAPI.getList();
-        if (d != null && d.code == RespCode.zero) {
-            let ss = d.data.filter((element, index) => {
+        let trans_meun = [];//  经过筛选后的联动按钮列表
+        let backdata = await this.menuAPI.getList();
+        if (backdata != null && RespCode.OK == backdata.code) {
+            let level1 = backdata.data.filter((element) => {
                 return element.menu_level == 1;
             });
-            for (const ele of ss) {
-                const p_id = ele.id;
-
-                let aa: any = {
+            for (const ele of level1) {
+                const p_id = ele.id;//一级按钮的id
+                //  模拟一级二级按钮列表
+                let main_menu: any = {
                     id: ele.id,
                     level: ele.menu_level,
                     pid: ele.menu_pid,
                     text: ele.menu_name,
-                    href: ele.menu_route,
-                    expanded: true,
-                    items: [] = []
+                    href: ele.menu_route,//模拟字段(后天返回相关字段)，用于设置二级路由
+                    expanded: true,//新增字段，是否可以展开
+                    items: [] = []//新增字段，放置二级按钮列表
                 };
-                let ww = d.data.filter((element, index) => {
+                let level2 = backdata.data.filter((element) => {
+                    //通过一级按钮的id和二级按钮的pid进行筛选，获取每个一级按钮下的二级按钮列表(数组里面对个对象)
                     return element.menu_level == 2 && element.menu_pid == p_id;
                 });
-
-                for (const ele2 of ww) {
-                    aa.items.push({
+                //循环得到的二级列表数组
+                for (const ele2 of level2) {
+                    main_menu.items.push({
                         id: ele2.id,
                         level: ele2.menu_level,
                         pid: ele2.menu_pid,
@@ -125,10 +122,9 @@ export default class IndexController extends BaseVue {
                         href: ele2.menu_route
                     });
                 }
-                ds.push(aa);
+                trans_meun.push(main_menu);
             }
-            // this.dxTreeView1.option({ dataSource: ds });
-            this.menuItems = ds;
+            this.menuItems = trans_meun;
         }
     }
 
@@ -153,19 +149,24 @@ export default class IndexController extends BaseVue {
     /**
      * 退出登录
      */
-    private async logOut() {
+    public async logOut() {
         try {
             //移除后台Token
             CommonUtils.removeStaffLoginInfo();
             CommonUtils.removeDictionary();
-            let d = await this.staffAPI.loginOut();
+            let logout_msg = await this.staffAPI.loginOut();
+            console.log(logout_msg)
         } catch (error) {
             console.log(error);
         }
         this.redirect("/login");
     }
 
-    private href_link(link: string) {
+    /**
+     * 路由链接
+     * @param link
+     */
+    public href_link(link: string) {
         this.$router.push({path: link});
     }
 

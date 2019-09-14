@@ -2,20 +2,17 @@
     <div id="wrapper">
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="nav-close"><i class="fa fa-times-circle"></i></div>
-            <div class="sidebar-collapse" v-slimscroll="{
-                height:'100%',
-                size:0
-            }">
+            <div class="sidebar-collapse" v-slimscroll="{ height:'100%', size:0 }">
                 <ul class="nav" id="side-menu">
+<!--                    头像与昵称-->
                     <li class="nav-header">
-                        <div class="dropdown profile-element">
-                            <span><img alt="image" class="img-circle" src="/static/avatar.png" style="width:64px;"/></span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="javascript: void(0);">
-                                <span class="clear">
-                                    <span class="block m-t-xs"><strong class="font-bold">{{staffNickName}}</strong></span>
-                                    <span class="text-muted text-xs block">{{staffRoleName}}<b class="caret"></b></span>
-                                </span>
+                        <div style="text-align: center;" class="dropdown profile-element">
+                            <img alt="image" class="img-circle" src="/static/avatar.png" style="width:64px;">
+                            <a data-toggle="dropdown" class="dropdown-toggle clear" href="javascript: void(0);">
+                                <span class="block m-t-xs"><strong class="font-bold">{{staffNickName}}</strong></span>
+                                <span class="text-muted text-xs block">{{staffRoleName}}<b class="caret"></b></span>
                             </a>
+                            <!--下拉列表-->
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li class="divider"></li>
                                 <li><a @click="logOut">{{exit}}</a></li>
@@ -23,6 +20,7 @@
                         </div>
                         <div class="logo-element">{{shortSiteTitle}}</div>
                     </li>
+<!--                    主页与首页-->
                     <li>
                         <a href="javascript: void(0);">
                             <i class="fa fa-home"></i>
@@ -31,19 +29,21 @@
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="J_menuItem" @click="href_link('/dashboard')" :class="{link_active:$route.path=='/dashboard'}" data-index="0">首页</a>
+                                <a @click="href_link('/dashboard')" class="J_menuItem" :class="{link_active:$route.path=='/dashboard'}" data-index="0">首页</a>
                             </li>
                         </ul>
                     </li>
+<!--                    默认的一级按钮列表-->
                     <li v-for="(item,index) in menuItems" :key="item.id">
                         <a href="javascript: void(0);">
                             <i :class="'fa '+getMenuIcon(index)"></i>
-                            <span class="nav-label">{{item.text}} </span>
+                            <span class="nav-label">{{item.text}}</span>
                             <span class="fa arrow"></span>
                         </a>
+<!--                        展开的二级按钮列表-->
                         <ul class="nav nav-second-level">
                             <li v-for="item2 in item.items" :key="item2.id">
-                                <a class="J_menuItem" :class="{link_active:$route.path=='/'+item2.href}" :data-index="item2.id" @click="href_link('/'+item2.href)">{{item2.text}}</a>
+                                <a @click="href_link('/'+item2.href)" class="J_menuItem" :class="{link_active:$route.path=='/'+item2.href}" :data-index="item2.id">{{item2.text}}</a>
                             </li>
                         </ul>
                     </li>
@@ -54,7 +54,8 @@
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" @click="toggleMini"><i class="fa fa-bars"></i></a>
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" @click="toggleMini"><i
+                                class="fa fa-bars"></i></a>
                         <span style="margin-left: 10px;line-height: 58px;">{{title}}</span>
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
@@ -99,7 +100,6 @@
 
 <script lang="ts">
     import IndexController from "./mainController";
-
     export default IndexController;
 </script>
 
