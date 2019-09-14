@@ -89,9 +89,8 @@
                     </div>
                 </div>
             </div>
-            <div class=" row footer">
-                <div class="pull-left">&copy; 版权所有:2018~ {{title}}
-                </div>
+            <div class="row footer">
+                <p class="pull-left">&copy; 版权所有:2019~ {{title}}</p>
             </div>
         </div>
         <user_change_password ref="user_change_password"></user_change_password>
@@ -103,14 +102,7 @@
     export default IndexController;
 </script>
 
-<style>
-    #app {
-        font-family: "Avenir", Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        color: #2c3e50;
-    }
-
+<style scoped>
     .page-container {
         width: 100%;
     }
