@@ -9,7 +9,6 @@ import {CommonUtils} from "@/common/CommonUtils";
 
 import {UploadApi} from "@/api/UploadApi";
 import {RespCode} from "@/common/RespCode";
-
 import file_uploader from "devextreme/ui/file_uploader";
 import popup from "../../../../node_modules/devextreme/ui/popup";
 import {ActivityPresentApi} from "@/api/ActivityPresentApi";
@@ -23,9 +22,6 @@ import {ActivityImgApi} from "@/api/ActivityImgApi";
 import {ActivityImgModel} from "@/models/ActivityImgModel";
 import {BaseResult2} from "@/models/BaseModel";
 
-/**
- * 活动列表
- */
 @Component({
     components: {
         DxDataGrid,
@@ -36,16 +32,11 @@ import {BaseResult2} from "@/models/BaseModel";
 export default class Home extends BaseVue {
     protected dxDataGridKey1: string = "dxDataGridKey1";
     protected dxDataGrid1: DevExpress.ui.dxDataGrid;
-
     private activityAPI = new ActivityApi();
-
     protected uploadApi = new UploadApi();
-
     private activityPresentApi = new ActivityPresentApi();
     private grid: DevExpress.ui.dxDataGrid;
-    //活动Id
-    private activityId: number = 0;
-
+    private activityId: number = 0;//活动Id
     private image_dialog: any = {
         visible: false,
         onHide: (flag: boolean) => {

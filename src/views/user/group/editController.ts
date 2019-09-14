@@ -1,18 +1,18 @@
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
+import {Component, Vue, Prop, Watch} from 'vue-property-decorator';
 import DevExpress from 'devextreme/bundles/dx.all';
-import { DxDataGrid, DxForm, DxTreeView, DxPopup } from 'devextreme-vue';
+import {DxDataGrid, DxForm, DxTreeView, DxPopup} from 'devextreme-vue';
 import $ from 'jquery';
 import BaseVue from '@/common/BaseVue';
 
-import { UserGroupApi } from '@/api/UserGroupApi';
-import { UserGroupModel } from '@/models/UserGroupModel';
-import { BaseModel } from '@/models/BaseModel';
+import {UserGroupApi} from '@/api/UserGroupApi';
+import {UserGroupModel} from '@/models/UserGroupModel';
+import {BaseModel} from '@/models/BaseModel';
 
-import { CommonUtils } from '@/common/CommonUtils';
-import { Lang } from '@/common/Lang';
-import { RespCode } from '@/common/RespCode';
-import { Validation } from '@/common/Validation';
-import { UserVipLevelApi } from '@/api/UserVipLevelApi';
+import {CommonUtils} from '@/common/CommonUtils';
+import {Lang} from '@/common/Lang';
+import {RespCode} from '@/common/RespCode';
+import {Validation} from '@/common/Validation';
+import {UserVipLevelApi} from '@/api/UserVipLevelApi';
 
 /**
  * 用户编辑
@@ -186,7 +186,6 @@ export default class Home extends BaseVue {
         });
 
 
-
         //按钮组
         const items3: Array<DevExpress.ui.dxFormSimpleItem | DevExpress.ui.dxFormGroupItem | DevExpress.ui.dxFormTabbedItem | DevExpress.ui.dxFormEmptyItem | DevExpress.ui.dxFormButtonItem> = [];
         items3.push({
@@ -228,10 +227,10 @@ export default class Home extends BaseVue {
             //caption: Lang.Edit,
             items: items2
         }, {
-                itemType: "group",
-                colCount: 3,
-                items: items3
-            });
+            itemType: "group",
+            colCount: 3,
+            items: items3
+        });
 
         let options: DevExpress.ui.dxFormOptions = {
             formData: this.dxFormData1,
@@ -241,6 +240,7 @@ export default class Home extends BaseVue {
         this.dxForm1.option(options);
         // this.dxSelectBox1 = this.dxForm1.getEditor("role_id");
     }
+
     /**
      * 重置
      */
@@ -248,9 +248,10 @@ export default class Home extends BaseVue {
         this.dxFormData1 = $.extend(true, {}, this.dxFormDataReset1);
         this.dxForm1.option("formData", this.dxFormData1);
     }
+
     /**
-   * 用户组信息提交
-   */
+     * 用户组信息提交
+     */
     private async onClickDoHandler() {
         try {
             if (!this.validateForm(this.dxForm1)) {
@@ -279,16 +280,16 @@ export default class Home extends BaseVue {
     }
 
     /**
-   * 返回
-   */
+     * 返回
+     */
     private onClickBackHandler() {
         this.redirect("/user/group/list");
     }
 
     /**
-   * 获取用户组模型
-   * @param id 
-   */
+     * 获取用户组模型
+     * @param id
+     */
     private async getUserGroupModel(id: number) {
         let d = await this.userGroupAPI.getUserGroupModel(id);
         this.dxFormData1 = d.data;
