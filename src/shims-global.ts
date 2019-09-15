@@ -8,10 +8,6 @@ declare var SITE_API_PATH: string;
 declare var SITE_PIC_PATH: string;
 
 interface JQuery {
-
-}
-
-interface JQuery {
     metisMenu(options?: object): JQuery;
     slimScroll(options?: object): JQuery;
 }

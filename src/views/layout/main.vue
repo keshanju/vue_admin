@@ -23,6 +23,8 @@
                     </li>
 <!--                    主页与首页-->
                     <li>
+<!--                        此处a标签的href属性值为#时灵敏，只需点击一次，如果为javascript: void(0)存在bug，需要点击两次才可展开，
+                            如果去掉href，点击时会跳转到undefined-->
                         <a href="#">
                             <i class="fa fa-home"></i>
                             <span class="nav-label">主页</span>

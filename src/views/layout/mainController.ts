@@ -57,14 +57,15 @@ export default class IndexController extends BaseVue {
         "fa-bars",
         "fa-bars",
         "fa-bars",
+        "fa-bars",
+        "fa-bars",
+        "fa-bars",
+        "fa-bars",
     ];//菜单图标
 
     public getMenuIcon(index: number = 0): string {
         return this.menuIcons[index];
     }
-
-    //用户信息
-    public userInfo: object;
 
     public userChangePassWordControl: BaseVue | any;
 
@@ -79,7 +80,6 @@ export default class IndexController extends BaseVue {
         await this.getMenu();
         //菜单
         $("#side-menu").metisMenu();
-
         //高度
         $("#content-main").height($(window).height() - 130);
 
@@ -155,7 +155,6 @@ export default class IndexController extends BaseVue {
             CommonUtils.removeStaffLoginInfo();
             CommonUtils.removeDictionary();
             let logout_msg = await this.staffAPI.loginOut();
-            console.log(logout_msg)
         } catch (error) {
             console.log(error);
         }

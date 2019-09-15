@@ -3,7 +3,7 @@
         <div class="row border-bottom dashboard-header">
             <div class="col-sm-6">
                 <h3>欢迎光临</h3>
-                <p>上次登录的时间:2018-12-12 11:11:11</p>
+                <p>数据创建时间:{{ServeRequestModel.create_time}}</p>
                 <p>最后登录的IP:127.0.0.1</p>
             </div>
             <div class="col-sm-6">
@@ -33,7 +33,7 @@
             <div class="col-xs-2">
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3>{{serverUserCount}}</h3>
+                        <h3>{{ServeRequestModel.online_users}}</h3>
                         <p>服务器在线人数</p>
                     </div>
                     <div class="icon">
@@ -88,7 +88,7 @@
             <div class="col-xs-2">
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3>15000</h3>
+                        <h3>{{ServeRequestModel.online_users_other}}</h3>
                         <p>访客</p>
                     </div>
                     <div class="icon">
