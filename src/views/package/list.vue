@@ -4,6 +4,6 @@
   </div>
 </template>
 <script lang="ts">
-import Home from './listController';
-export default Home;
+import PackageIndex from './listController';
+export default PackageIndex;
 </script>

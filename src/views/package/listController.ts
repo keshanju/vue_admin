@@ -20,7 +20,7 @@ import {PackagePriceApi} from '@/api/PackagePriceApi';
         DxDataGrid, DxForm
     }
 })
-export default class Home extends BaseVue {
+export default class PackageIndex extends BaseVue {
 
     protected dxDataGridKey1: string = "dxDataGridKey1";
     protected dxDataGrid1: DevExpress.ui.dxDataGrid;
@@ -604,8 +604,6 @@ export default class Home extends BaseVue {
                 onClick: this.onSearchHandler
             }
         });
-
-
         //创建搜索工具条
         this.createSearchToolbars(toolbarItems, this.dxDataGrid1.option("columns"), () => {
             this.getDataList();
@@ -614,7 +612,7 @@ export default class Home extends BaseVue {
 
     /**
      * 添加
-     * @param e
+     * @param sender
      */
     private onAddHandler(sender) {
         this.redirect("/package/edit");
@@ -633,7 +631,7 @@ export default class Home extends BaseVue {
 
     /**
      * 搜索
-     * @param e
+     * @param sender
      */
     private onSearchHandler(sender) {
         this.dxDataGrid1.refresh();
