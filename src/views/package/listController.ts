@@ -1,16 +1,16 @@
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
 import DevExpress from 'devextreme/bundles/dx.all';
-import { DxDataGrid, DxForm } from 'devextreme-vue';
+import {DxDataGrid, DxForm} from 'devextreme-vue';
 import menu from "devextreme/ui/menu";
 import $ from 'jquery';
 import BaseVue from '@/common/BaseVue';
 
-import { PackageApi } from '@/api/PackageApi';
-import { CommonUtils } from '@/common/CommonUtils';
-import { DiscountApi } from '@/api/DiscountApi';
-import { RespCode } from '@/common/RespCode';
-import { LangUtils } from '@/common/LangUtils';
-import { PackagePriceApi } from '@/api/PackagePriceApi';
+import {PackageApi} from '@/api/PackageApi';
+import {CommonUtils} from '@/common/CommonUtils';
+import {DiscountApi} from '@/api/DiscountApi';
+import {RespCode} from '@/common/RespCode';
+import {LangUtils} from '@/common/LangUtils';
+import {PackagePriceApi} from '@/api/PackagePriceApi';
 
 /**
  * 套餐列表
@@ -24,9 +24,7 @@ export default class Home extends BaseVue {
 
     protected dxDataGridKey1: string = "dxDataGridKey1";
     protected dxDataGrid1: DevExpress.ui.dxDataGrid;
-
     private packageAPI = new PackageApi();
-
     private discountApi = new DiscountApi();
 
     /**
@@ -311,7 +309,7 @@ export default class Home extends BaseVue {
 
     /**
      * 双击编辑
-     * @param e 
+     * @param e
      */
     private onRowClickHandler(sender) {
         this.dbClick(() => {
@@ -321,10 +319,10 @@ export default class Home extends BaseVue {
 
 
     /**
- * 编辑
- * @param cellElement 
- * @param option 
- */
+     * 编辑
+     * @param cellElement
+     * @param option
+     */
     private CellEdit(cellElement: DevExpress.core.dxElement, option: any) {
         new menu(cellElement, {
             dataSource: [{
@@ -404,7 +402,7 @@ export default class Home extends BaseVue {
 
     /**
      * 套餐 打折绑定
-     * @param id 
+     * @param id
      */
     private async bindDiscountPackage(id: number) {
         let d_discount_price_package_bind = await this.packageAPI.getPackageDiscountList(Number(id));
@@ -563,7 +561,7 @@ export default class Home extends BaseVue {
                         return false;
                     }
 
-                    let d = await this.packageAPI.setPackageDiscount(Number(id), selectedNodes,selectedNodes_price);
+                    let d = await this.packageAPI.setPackageDiscount(Number(id), selectedNodes, selectedNodes_price);
                     if (d.code == RespCode.OK || d.code == RespCode.isSame || d.code == RespCode.isSameSaveData) {
                         this.toast(() => {
 
@@ -578,10 +576,11 @@ export default class Home extends BaseVue {
             }
         );
     }
+
     /**
- * 初始化工具条
- * @param e 
- */
+     * 初始化工具条
+     * @param e
+     */
     private onToolbarPreparingHandler(e: { component?: DevExpress.DOMComponent, element?: DevExpress.core.dxElement, model?: any, toolbarOptions?: DevExpress.ui.dxToolbarOptions }) {
         let dataGrid = e.component;
         let toolbarItems = e.toolbarOptions.items;
@@ -614,9 +613,9 @@ export default class Home extends BaseVue {
     }
 
     /**
-   * 添加
-   * @param e 
-   */
+     * 添加
+     * @param e
+     */
     private onAddHandler(sender) {
         this.redirect("/package/edit");
     }
@@ -633,9 +632,9 @@ export default class Home extends BaseVue {
     }
 
     /**
- * 搜索
- * @param e 
- */
+     * 搜索
+     * @param e
+     */
     private onSearchHandler(sender) {
         this.dxDataGrid1.refresh();
     }

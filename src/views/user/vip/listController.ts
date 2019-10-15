@@ -1,21 +1,22 @@
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import DevExpress from 'devextreme/bundles/dx.all';
-import { DxDataGrid, DxForm } from 'devextreme-vue';
-import $ from 'jquery';
-import BaseVue from '@/common/BaseVue';
+import {Component, Vue, Prop} from "vue-property-decorator";
+import DevExpress from "devextreme/bundles/dx.all";
+import {DxDataGrid, DxForm} from "devextreme-vue";
+import $ from "jquery";
+import BaseVue from "@/common/BaseVue";
 
-import { UserVipLevelApi } from '@/api/UserVipLevelApi';
-import { Lang } from '@/common/Lang';
+import {UserVipLevelApi} from "@/api/UserVipLevelApi";
+import {Lang} from "@/common/Lang";
+
 /**
  * 布局列表
  */
 @Component({
     components: {
-        DxDataGrid, DxForm
+        DxDataGrid,
+        DxForm
     }
 })
 export default class Home extends BaseVue {
-
     protected dxDataGridKey1: string = "dxDataGridKey1";
     protected dxDataGrid1: DevExpress.ui.dxDataGrid;
 
@@ -28,6 +29,7 @@ export default class Home extends BaseVue {
         (this.$parent as any).content_title = "用户等级";
         this.initComponents();
         this.getDataList();
+
     }
 
     /**
@@ -40,14 +42,14 @@ export default class Home extends BaseVue {
             {
                 dataField: "id",
                 caption: "编号",
-                width: 80,
+                width: 80
             },
             {
                 allowFiltering: true,
                 allowSorting: true,
                 dataField: "title",
                 caption: "标题",
-                width: 180,
+                width: 180
             },
             {
                 allowFiltering: true,
@@ -59,21 +61,22 @@ export default class Home extends BaseVue {
             {
                 dataField: "create_time",
                 caption: "创建时间",
-                width: 160,
+                width: 160
             },
             {
                 dataField: "create_staff_name",
                 caption: "创建人",
-                width: 80,
-            }, {
+                width: 80
+            },
+            {
                 dataField: "change_time",
                 caption: "修改时间",
-                width: 160,
+                width: 160
             },
             {
                 dataField: "change_staff_name",
                 caption: "修改人",
-                width: 80,
+                width: 80
             },
             {
                 fixed: true,
@@ -94,26 +97,26 @@ export default class Home extends BaseVue {
 
         this.dxDataGrid1.option(options);
     }
+
     /**
-      * 双击编辑
-      * @param e 
-      */
+     * 双击编辑
+     * @param e
+     */
     private onRowClickHandler(sender) {
         this.dbClick(() => {
             this.redirect("/user/vip/edit/" + sender.key.id);
         });
     }
-    /**
-  * 编辑
-  * @param cellElement 
-  * @param option 
-  */
-    private CellEdit(cellElement: DevExpress.core.dxElement, option: any) {
 
+    /**
+     * 编辑
+     * @param cellElement
+     * @param option
+     */
+    private CellEdit(cellElement: DevExpress.core.dxElement, option: any) {
         let aDel = this.getCreateLink("删除", async sender => {
             let r = await this.confirm("确定要删除数据吗?");
-            if (r)
-                this.delUserVipLevel(option.value);
+            if (r) this.delUserVipLevel(option.value);
         });
 
         let aEdit = this.getCreateLink("编辑", sender => {
@@ -126,11 +129,17 @@ export default class Home extends BaseVue {
             .append(aDel)
             .appendTo(cellElement);
     }
+
     /**
-  * 初始化工具条
-  * @param e 
-  */
-    private onToolbarPreparingHandler(e: { component?: DevExpress.DOMComponent, element?: DevExpress.core.dxElement, model?: any, toolbarOptions?: DevExpress.ui.dxToolbarOptions }) {
+     * 初始化工具条
+     * @param e
+     */
+    private onToolbarPreparingHandler(e: {
+        component?: DevExpress.DOMComponent;
+        element?: DevExpress.core.dxElement;
+        model?: any;
+        toolbarOptions?: DevExpress.ui.dxToolbarOptions;
+    }) {
         let dataGrid = e.component;
         let toolbarItems = e.toolbarOptions.items;
 
@@ -161,16 +170,17 @@ export default class Home extends BaseVue {
     }
 
     /**
- * 搜索
- * @param e 
- */
+     * 搜索
+     * @param e
+     */
     private onRefreshHandler(sender) {
         this.dxDataGrid1.refresh();
     }
+
     /**
-   * 添加
-   * @param e 
-   */
+     * 添加
+     * @param e
+     */
     private onAddHandler(sender) {
         this.redirect("/user/vip/edit");
     }
@@ -179,7 +189,10 @@ export default class Home extends BaseVue {
      * 获取数据列表
      */
     private getDataList() {
-        let ds: any = this.getDataGridPager(async (strWhere, pageSize, pageIndex) => await this.layoutAPI.getListPager(strWhere, pageSize, pageIndex));
+        let ds: any = this.getDataGridPager(
+            async (strWhere, pageSize, pageIndex) =>
+                await this.layoutAPI.getListPager(strWhere, pageSize, pageIndex)
+        );
         this.dxDataGrid1.option({
             remoteOperations: true,
             dataSource: ds
@@ -187,11 +200,10 @@ export default class Home extends BaseVue {
     }
 
     /**
-* 删除
-*/
+     * 删除
+     */
     private async delUserVipLevel(id: number) {
         let d = await this.layoutAPI.setDelete(id);
         this.dxDataGrid1.refresh();
     }
-
 }
