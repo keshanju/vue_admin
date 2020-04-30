@@ -21,7 +21,7 @@
     "devextreme-vue": "^18.1.7-alpha.10",
     "esthread": "^1.0.6",
     "export-from-json": "^1.0.15",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "js-base64": "^2.4.8",
     "js-export-excel": "^1.1.0",
     "js-md5": "^0.7.3",
