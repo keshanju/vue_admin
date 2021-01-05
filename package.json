@@ -13,7 +13,7 @@
     "@types/ckeditor": "^4.9.0",
     "@types/jest": "^23.3.9",
     "@types/jquery": "^3.3.22",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
     "ckeditor": "^4.9.2",
     "devextreme": "^18.1.7",
